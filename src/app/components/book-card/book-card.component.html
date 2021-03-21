@@ -1,0 +1,21 @@
+<!-- NOTE: parent must have row class -->
+
+<!-- TODO: get rid of inline styles -->
+<div class="card bg-secondary" style="min-height: 400px; max-height: 400px">
+  <img
+    src="{{ book!.volumeInfo.imageLinks.smallThumbnail }}"
+    alt=""
+    class="h-100 d-block mx-auto"
+    style="max-height: 200px"
+  />
+  <!-- <div
+    class="bg-danger rounded-top"
+    style="min-height: 200px; max-height: 200px"
+  >
+  </div> -->
+  <div class="card-block p-2 text-center">
+    <h3 class="card-title text-center">{{ book!.volumeInfo.title }}</h3>
+    <p>Published {{ book!.volumeInfo.publishedDate }}</p>
+    <app-book-card-description [book]="book"></app-book-card-description>
+  </div>
+</div>

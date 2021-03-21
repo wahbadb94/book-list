@@ -1,0 +1,17 @@
+<p
+  *ngIf="
+    !!book!.volumeInfo.description &&
+      book!.volumeInfo.description!.length > 100;
+    else elseBlock
+  "
+>
+  {{ book!.volumeInfo.description!.substring(0, 100).concat("...") }}
+</p>
+<ng-template #elseBlock>
+  <p *ngIf="!!book!.volumeInfo.description">
+    {{ book!.volumeInfo.description!.substring(0, 100) }}
+  </p>
+  <p *ngIf="!!book!.volumeInfo.description === false" class="font-italic">
+    no description was provided
+  </p>
+</ng-template>
