@@ -73,18 +73,20 @@ $container-max-widths: (
 
 
 // extend the card class
-.card {
+.my-card {
   @extend .card;
+  background-color: $secondary;
   box-shadow: $box-shadow;
-  transition: all 0.6s cubic-bezier(.25,.8,.25,1);
+  transition: all 0.7s cubic-bezier(.25,.8,.25,1);
 }
-.card:hover {
+.my-card:hover {
   cursor: pointer;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.28), 0 10px 10px rgba(0,0,0,0.24);
+  background-color: darken($secondary, 8%);
 }
 
 .text-missing-light {
-  color: lighten($secondary, 25%);
+  color: lighten($primary, 10%);
 }
 
 .bg-body {
