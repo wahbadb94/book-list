@@ -47,27 +47,27 @@
       </div>
       <div class="modal-body">
         <p *ngIf="!!book!.volumeInfo.authors">
-          <span class="font-weight-bold">Author(s): </span>
+          <span class="fw-bold">Author(s): </span>
           {{ book!.volumeInfo.authors!.join(", ") }}
         </p>
         <p *ngIf="!!!book!.volumeInfo.authors">
-          <span class="font-weight-bold">Author(s): </span>
-          <span class="font-italic text-missing-light"
+          <span class="fw-bold">Author(s): </span>
+          <span class="fst-italic text-missing-light"
             >No author information was provided</span
           >
         </p>
         <p>
-          <span class="font-weight-bold">Ratings(s): </span>
+          <span class="fw-bold">Ratings(s): </span>
           <span class="text-missing-light">0</span>
         </p>
         <p>
-          <span class="font-weight-bold">Description:</span>
+          <span class="fw-bold">Description:</span>
           <span *ngIf="!!book!.volumeInfo.description">
             {{ book!.volumeInfo.description! }}
           </span>
           <span
             *ngIf="!!book!.volumeInfo.description === false"
-            class="font-italic text-missing-light"
+            class="fst-italic text-missing-light"
           >
             no description was provided
           </span>

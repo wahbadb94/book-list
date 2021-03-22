@@ -7,10 +7,7 @@
 ></p>
 <ng-template #elseBlock>
   <p *ngIf="!!book!.searchInfo" [innerHTML]="book!.searchInfo!.textSnippet"></p>
-  <p
-    *ngIf="!!book!.searchInfo === false"
-    class="font-italic text-missing-light"
-  >
+  <p *ngIf="!!book!.searchInfo === false" class="fst-italic text-missing-light">
     description unavailable
   </p>
 </ng-template>
