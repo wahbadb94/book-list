@@ -7,7 +7,7 @@ export type Book = {
 type VolumeInfo = {
   title: string;
   subtitle: string;
-  authors: string[];
+  authors?: string[];
   publisher: string;
   publishedDate: Date;
   description?: string;

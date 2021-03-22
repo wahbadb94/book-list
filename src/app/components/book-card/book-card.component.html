@@ -29,12 +29,15 @@
   area-labelledby="detailViewLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-secondary">
-      <div class="modal-header">
-        <h5 class="modal-title col" id="detailViewLabel">
-          {{ book!.volumeInfo.title }}
-        </h5>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content bg-body">
+      <div class="modal-header bg-dark">
+        <div class="row text-center">
+          <h4 class="modal-title col col-12" id="detailViewLabel">
+            {{ book!.volumeInfo.title }}
+          </h4>
+          <h6 class="col-12">{{ book!.volumeInfo.subtitle }}</h6>
+        </div>
         <button
           type="button"
           class="close text-danger"
@@ -45,7 +48,38 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Author(s): {{ book!.volumeInfo.authors.join(", ") }}</p>
+        <p *ngIf="!!book!.volumeInfo.authors">
+          <span class="font-weight-bold">Author(s):</span>
+          {{ book!.volumeInfo.authors!.join(", ") }}
+        </p>
+        <p *ngIf="!!!book!.volumeInfo.authors">
+          <span class="font-weight-bold">Author(s):</span>
+          <span class="font-italic text-missing-light"
+            >No author information was provided</span
+          >
+        </p>
+        <p>
+          <span class="font-weight-bold">Ratings(s): </span>
+          <span class="text-missing-light">0</span>
+        </p>
+        <p>
+          <span class="font-weight-bold">Description:</span>
+          <span *ngIf="!!book!.volumeInfo.description">
+            {{ book!.volumeInfo.description! }}
+          </span>
+          <span
+            *ngIf="!!book!.volumeInfo.description === false"
+            class="font-italic text-missing-light"
+          >
+            no description was provided
+          </span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-success">Review</button>
       </div>
     </div>
   </div>
