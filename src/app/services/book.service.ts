@@ -17,7 +17,7 @@ export class BookService {
   private readonly _googleCloudProjectId = 'leafy-loader-288300';
   private readonly _queryParamsGetAllLimited = `q=${this._searchKeywords}&maxResults=${this._resultsLimit}&key=${this._googleBooksApiKey}&project=${this._googleCloudProjectId}`;
 
-  private readonly httpOptions = {
+  private readonly _httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
@@ -26,7 +26,7 @@ export class BookService {
   getBooks() {
     return this.http.get<GoogleBooksApiResponse>(
       `${this._baseUrl}?${this._queryParamsGetAllLimited}`,
-      this.httpOptions
+      this._httpOptions
     );
   }
 }

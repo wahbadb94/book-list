@@ -6,11 +6,16 @@ import { Book } from 'src/app/models/book';
   templateUrl: './book-card.component.html',
 })
 export class BookCardComponent implements OnInit {
-  @Input() book?: Book;
-
-  mouseOver: boolean = false;
+  @Input() book!: Book;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // ensure book has been passed as input
+    if (this.book === undefined || this.book === null) {
+      throw new Error(
+        `attribute "book" is required by ${this.constructor.name}`
+      );
+    }
+  }
 }
