@@ -8,7 +8,8 @@ import { ReviewRequest, ReviewResponse } from '../models/review';
 export class ReviewService {
   constructor(private http: HttpClient) {}
 
-  private readonly _baseUrl = 'https://localhost:5001/api/reviews';
+  private readonly _baseUrl =
+    'https://gdbooksapi.azurewebsites.net/api/reviews';
 
   private readonly _httpOptions = {
     headers: new HttpHeaders({

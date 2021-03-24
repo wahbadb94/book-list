@@ -9,10 +9,10 @@ import { ReviewRequest, ReviewResponse } from 'src/app/models/review';
 import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
-  selector: 'app-dummy-form',
-  templateUrl: './dummy-form.component.html',
+  selector: 'app-review-form',
+  templateUrl: './review-form.component.html',
 })
-export class DummyFormComponent implements OnInit {
+export class ReviewFormComponent implements OnInit {
   @Input() bookId!: string;
   @Output() reviewCreatedEvent = new EventEmitter<ReviewResponse>();
 

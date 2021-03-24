@@ -9,7 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { BookCardDescriptionComponent } from './components/book-card/book-card-description/book-card-description.component';
-import { DummyFormComponent } from './components/dummy-form/dummy-form.component';
+import { ReviewFormComponent } from './components/dummy-form/review-form.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BookDetailViewComponent } from './components/book-detail-view/book-detail-view.component';
 import { ReviewCardComponent } from './components/review-card/review-card.component';
@@ -23,7 +23,7 @@ import { FormSubmitSuccessComponent } from './components/dummy-form/form-submit-
     NavbarComponent,
     BooksListComponent,
     BookCardComponent,
-    DummyFormComponent,
+    ReviewFormComponent,
     BookDetailViewComponent,
     ReviewCardComponent,
     FormSubmitSuccessComponent,
