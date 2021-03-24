@@ -25,4 +25,11 @@ export class ReviewService {
       this._httpOptions
     );
   }
+
+  getReviewsByBookId(bookId: string) {
+    return this.http.get<ReviewResponse[]>(
+      `${this._baseUrl}/?bookId=${bookId}`,
+      this._httpOptions
+    );
+  }
 }

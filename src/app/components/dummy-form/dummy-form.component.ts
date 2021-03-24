@@ -1,24 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-
-import { Book } from 'src/app/models/book';
-import { ReviewRequest } from 'src/app/models/review';
+import { ReviewRequest, ReviewResponse } from 'src/app/models/review';
 import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
-  selector: 'app-book-review-form',
-  templateUrl: './book-review-form.component.html',
+  selector: 'app-dummy-form',
+  templateUrl: './dummy-form.component.html',
 })
-export class BookReviewFormComponent implements OnInit {
-  @Input() book!: Book;
+export class DummyFormComponent implements OnInit {
+  @Input() bookId!: string;
+  @Output() reviewCreatedEvent = new EventEmitter<ReviewResponse>();
 
-  // form state
   myForm!: FormGroup;
   loading = false;
   success = false;
@@ -41,48 +38,46 @@ export class BookReviewFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // ensure book has been passed as input
-    if (this.book === undefined || this.book === null) {
-      throw new Error(
-        `attribute "book" is required by ${this.constructor.name}`
-      );
-    }
-
     this.myForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       reviewBody: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
       ]),
-      rating: new FormControl(null, [
+      rating: new FormControl(0, [
         Validators.required,
         Validators.min(1),
         Validators.max(5),
       ]),
-      bookId: this.book.id,
     });
   }
 
   async handleSubmit() {
-    console.log('submitting!');
-    this.loading = true;
     const formValue = this.myForm.value;
 
     const reviewRequest: ReviewRequest = {
-      bookId: this.book.id,
+      bookId: this.bookId,
       name: formValue.name,
       rating: parseInt(formValue.rating),
       reviewBody: formValue.reviewBody,
     };
 
+    //
     try {
-      await this.reviewService.createReview(reviewRequest).toPromise();
-      this.success = true;
+      this.loading = true;
+      this.reviewService
+        .createReview(reviewRequest)
+        .toPromise()
+        .then((reviewResponse) => {
+          console.log(reviewResponse);
+          this.loading = false;
+          this.success = true;
+          this.myForm.reset();
+          this.reviewCreatedEvent.emit(reviewResponse);
+        })
+        .catch((err) => console.error(err));
     } catch (error) {
       console.error(error);
     }
-
-    this.loading = false;
-    this.success && this.myForm.reset();
   }
 }

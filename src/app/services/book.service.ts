@@ -29,4 +29,8 @@ export class BookService {
       this._httpOptions
     );
   }
+
+  getBook(id: string) {
+    return this.http.get<Book>(`${this._baseUrl}/${id}`, this._httpOptions);
+  }
 }

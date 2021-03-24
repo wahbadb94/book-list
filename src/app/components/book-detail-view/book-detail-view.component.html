@@ -1,0 +1,103 @@
+<div
+  *ngIf="loadingDetails"
+  class="text-center container-fluid min-vh-100 my-auto"
+>
+  <div
+    class="spinner-border text-info m-5 p5"
+    role="status"
+    style="width: 3rem; height: 3rem"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div *ngIf="loadingDetails == false">
+  <div class="container p-4 text-light">
+    <!-- Book Titles -->
+    <div class="mb-4">
+      <h1>
+        {{ book!.volumeInfo.title }}
+      </h1>
+      <h4 class="mt-2">{{ book!.volumeInfo.subtitle }}</h4>
+    </div>
+
+    <!-- Authors -->
+    <p *ngIf="!!book!.volumeInfo.authors">
+      <span class="fw-bold">Author(s): </span>
+      {{ book!.volumeInfo.authors!.join(", ") }}
+    </p>
+    <p *ngIf="!!!book!.volumeInfo.authors">
+      <span class="fw-bold">Author(s): </span>
+      <span class="fst-italic text-missing-light">
+        No author information was provided
+      </span>
+    </p>
+
+    <!-- Description -->
+    <p>
+      <span class="fw-bold">Description: </span>
+      <span
+        *ngIf="!!book!.volumeInfo.description"
+        [innerHTML]="book!.volumeInfo.description!"
+      >
+      </span>
+      <span
+        *ngIf="!!book!.volumeInfo.description === false"
+        class="fst-italic text-missing-light"
+      >
+        no description was provided
+      </span>
+    </p>
+
+    <!-- Review Buttons-->
+    <div>
+      <div>
+        <a
+          href="#"
+          class="btn btn-primary text-light"
+          data-toggle="collapse"
+          data-target="#showReviews"
+          [class.disabled]="loadingReviews"
+        >
+          <span *ngIf="loadingReviews" class="text-missing-light">
+            loading reviews...
+          </span>
+          <span *ngIf="!loadingReviews">{{ reviews.length }} User Reviews</span>
+        </a>
+        <button
+          class="btn btn-success ms-2"
+          type="button"
+          data-toggle="modal"
+          data-target="#addReviewModal"
+        >
+          Add Review
+        </button>
+      </div>
+
+      <!-- Collapsible Review List -->
+      <div *ngIf="!loadingReviews">
+        <div
+          class="collapse mt-4 container bg-dark p-3 rounded"
+          id="showReviews"
+        >
+          <div *ngIf="reviews.length > 0">
+            <div *ngFor="let review of reviews">
+              <app-review-card [review]="review"></app-review-card>
+              <hr />
+            </div>
+          </div>
+          <div *ngIf="reviews.length === 0" class="p2">
+            <p class="text-missing-light fst-italic">
+              Be the first to review this book!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Modal -->
+    <app-dummy-form
+      [bookId]="book.id"
+      (reviewCreatedEvent)="handleReviewCreatedEvent($event)"
+    ></app-dummy-form>
+  </div>
+</div>
