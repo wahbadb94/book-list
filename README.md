@@ -1,4 +1,4 @@
-# BookList
+# BookList Client App
 Lists information about the first 40 books with the search phrase 'National Parks'.
 Allows users to read and create reviews for those books.
 
