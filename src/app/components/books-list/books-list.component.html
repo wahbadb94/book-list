@@ -1,9 +1,21 @@
-<div class="mt-4 container">
+<div
+  *ngIf="loadingBooks"
+  class="text-center container-fluid min-vh-100 my-auto"
+>
+  <div
+    class="spinner-border text-info m-5 p5"
+    role="status"
+    style="width: 3rem; height: 3rem"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="mt-4 container-fluid container-lg" *ngIf="loadingBooks === false">
   <div class="row justify-content-center px-3">
     <app-book-card
       *ngFor="let book of books"
       [book]="book"
-      class="col-10 col-sm-9 col-md-6 col-lg-4 col-xxl-3 text-light mb-3 mb-md-4"
+      class="col-11 col-sm-8 col-md-6 col-lg-4 col-xxl-3 text-light mb-3 mb-md-4"
     >
     </app-book-card>
   </div>

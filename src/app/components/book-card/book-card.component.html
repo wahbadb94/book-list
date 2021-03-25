@@ -9,11 +9,23 @@
   <img
     src="{{ book!.volumeInfo.imageLinks.smallThumbnail }}"
     alt=""
-    class="h-100 d-block mx-auto"
-    style="max-height: 200px"
+    class="mx-auto"
   />
   <div class="card-block p-2 text-center">
-    <h3 class="card-title text-center">{{ book!.volumeInfo.title }}</h3>
+    <h3
+      class="card-title text-center"
+      *ngIf="book.volumeInfo.title.length < 20; else elseBlock"
+    >
+      {{ book!.volumeInfo.title }}
+    </h3>
+    <ng-template #elseBlock>
+      <h4 *ngIf="book.volumeInfo.title.length < 30; else finally">
+        {{ book!.volumeInfo.title }}
+      </h4>
+    </ng-template>
+    <ng-template #finally>
+      <h4>{{ book!.volumeInfo.title.substring(0, 27) }}...</h4>
+    </ng-template>
     <p>Published {{ book!.volumeInfo.publishedDate }}</p>
     <app-book-card-description [book]="book"></app-book-card-description>
   </div>

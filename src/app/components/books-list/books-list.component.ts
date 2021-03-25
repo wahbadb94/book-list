@@ -9,13 +9,17 @@ import { BookService } from 'src/app/services/book.service';
 export class BooksListComponent implements OnInit {
   books: Book[] = [];
 
+  loadingBooks = true;
+
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
+    this.loadingBooks = true;
+
     this.bookService.getBooks().subscribe(
       (resp) => {
         this.books = resp.items;
-        console.log(resp.items);
+        this.loadingBooks = false;
       },
       (err) => console.log(err)
     );

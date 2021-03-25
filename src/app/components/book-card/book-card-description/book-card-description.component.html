@@ -1,9 +1,9 @@
 <p
   *ngIf="
-    !!book!.searchInfo && book!.searchInfo!.textSnippet.length > 100;
+    !!book!.searchInfo && book!.searchInfo!.textSnippet.length > 80;
     else elseBlock
   "
-  [innerHTML]="book!.searchInfo!.textSnippet!.substring(0, 100).concat('...')"
+  [innerHTML]="book!.searchInfo!.textSnippet!.substring(0, 80).concat('...')"
 ></p>
 <ng-template #elseBlock>
   <p *ngIf="!!book!.searchInfo" [innerHTML]="book!.searchInfo!.textSnippet"></p>
